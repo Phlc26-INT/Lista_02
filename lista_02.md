@@ -1,20 +1,3 @@
-# Instruções
-
-- Faça uma cópia deste arquivo .md para um repositório próprio
-- Resolva as 6 questões objetivas assinalando a alternativa correta
-- Resolva as 4 questões dissertativas escrevendo no próprio arquivo .md
-  - lembre-se de utilizar as estruturas de código como ``esta aqui com ` `` ou
-```javascript
-//esta aqui com ```
-let a = "olá"
-let b = 10
-print(a)
-```
-- Resolva as questões com uso do Visual Studio Code ou ambiente similar.
-- Teste seus códigos antes de trazer a resposta para cá.
-- Cuidado com ChatGPT e afins: entregar algo só para ganhar nota não faz você aprender e ficar mais inteligente. Não seja dependente da máquina! (E não se envolva em plágio!)
-- ao final, publique seu arquivo lista_02.md com as respostas em seu repositório, e envie o link pela Adalove. 
-
 # Questões objetivas
 
 **1)** Considere o seguinte código JavaScript:
@@ -256,21 +239,6 @@ Função ClassificarFrete(valorCompra):
         Retornar "Frete com custo adicional!"
     Senão 
         Retornar "Frete grátis!"
-
-# Exemplos de uso
-Início
-    # Casos de teste
-    valorPedido1 <- 30.00
-    valorPedido2 <- 100.50
-    valorPedido3 <- 250.75
-
-    # Imprimir resultados
-    Escrever("Pedido de R$", valorPedido1, ": ", ClassificarFrete(valorPedido1))
-    Escrever("Pedido de R$", valorPedido2, ": ", ClassificarFrete(valorPedido2))
-    Escrever("Pedido de R$", valorPedido3, ": ", ClassificarFrete(valorPedido3))
-Fim
-
-
 ```
 
 
@@ -337,7 +305,6 @@ Classe Moto Herda Veiculo:
         fatorEficiencia <- Se (Este.cilindrada > 250) então 1.2 Senão 1.0
         consumoAjustado <- combustivelGasto * fatorEficiencia
         Retornar consumoAjustado
-FIM
 ``` 
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
@@ -351,7 +318,46 @@ Considere a fórumla de atualização velocidade:
     velocidade = velocidadeInicial - desaceleracao * tempo
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
-______
+
+**Resposta:**
+
+```
+Função SimularPousoSonda(
+    velocidadeInicial: Real, 
+    velocidadeSegura: Real, 
+    desaceleracao: Real, 
+    tempoMaximo: Real
+):
+    # Inicialização das variáveis
+    tempo <- 0
+    velocidadeAtual <- velocidadeInicial
+
+    # Loop de simulação de pouso
+    Enquanto (velocidadeAtual > velocidadeSegura E tempo < tempoMaximo) faça:
+        # Atualiza velocidade
+        velocidadeAtual <- velocidadeInicial - (desaceleracao * tempo)
+        
+        # Incrementa tempo
+        tempo <- tempo + 0.1
+
+    # Verifica condições de pouso
+    Se (velocidadeAtual <= velocidadeSegura) então
+        Retornar {
+            "Status": "Pouso Seguro", 
+            "Tempo de Descida": tempo, 
+            "Velocidade Final": velocidadeAtual
+        }
+    Senão Se (tempo >= tempoMaximo) então
+        Retornar {
+            "Status": "Falha de Pouso", 
+            "Motivo": "Tempo máximo de descida excedido"
+        }
+    Senão
+        Retornar {
+            "Status": "Falha de Pouso", 
+            "Motivo": "Velocidade não atingiu nível seguro"
+        }
+``` 
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
 
@@ -383,3 +389,26 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo. 
+
+**Resposta:**
+```
+Função MultiplicarMatrizesInvestimento(matrizA, matrizB):
+    # Verifica se as matrizes podem ser multiplicadas
+    Se (tamanho(matrizA[0]) ≠ tamanho(matrizB)) então
+        Retornar "Matrizes incompatíveis para multiplicação"
+    
+    # Inicializa matriz de resultado
+    linhasA <- tamanho(matrizA)
+    colunasB <- tamanho(matrizB[0])
+    matrizResultado <- novaMatriz(linhasA, colunasB)
+
+    # Multiplica matrizes
+    Para i de 0 até linhasA-1 faça:
+        Para j de 0 até colunasB-1 faça:
+            matrizResultado[i][j] <- 0
+            Para k de 0 até tamanho(matrizB)-1 faça:
+                matrizResultado[i][j] <- matrizResultado[i][j] + 
+                    (matrizA[i][k] * matrizB[k][j])
+
+    Retornar matrizResultado
+``` 
